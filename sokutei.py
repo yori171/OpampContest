@@ -1,5 +1,5 @@
-def write(name,naiyou):
-    with open('./'+name+'.sp','w') as f:
+def write(name,naiyou,net):
+    with open('./'+name+'('+net+').sp','w') as f:
         f.write(naiyou)
     print(name,".sp　というファイルを生成しました。")
 
@@ -56,7 +56,7 @@ def sp1():
             ".MEAS TRAN srf  PARAM='(srf1+srf2+srf3)/3'\n"
             ".MEAS TRAN sr   PARAM='min(abs(srr),abs(srf))'\n"
             ".END\n")
-    write(name, naiyou)
+    write(name, naiyou,net1)
 
 def sp2():
     print("2.出力抵抗の.spファイルを生成します。")
@@ -78,7 +78,7 @@ def sp2():
             ".PARAM half='psvoltage/2' valr1=10k valr2=10k\n"
             ".TF V(out) VIN\n"
             ".END\n")
-    write(name, naiyou)
+    write(name, naiyou,net2)
 
 def sp3():
     print("3.出力電圧範囲の.spファイルを生成します。")
@@ -111,7 +111,7 @@ def sp3():
             ".PRINT V(out1,os) V(out2,os)\n"
             "2+ PAR'1-ABS(V(out1,os))/V(in1)' PAR'1-ABS(V(out2,os))/V(in1)'\n\n"
             ".END\n\n")
-    write(name, naiyou)
+    write(name, naiyou,net3)
 
 def sp4():
     print("4.消費電力、消費電流の.spファイルを生成します。")
@@ -138,7 +138,7 @@ def sp4():
             ".MEAS DC ib PARAM='max(abs(ivdd),abs(ivss))'\n"
             ".MEAS DC pdis PARAM='ib*2*step'\n"
             ".EN\n\n")
-    write(name, naiyou)
+    write(name, naiyou,net4)
 
 def sp5():
     print("5.全高調波歪の.spファイルを生成します。")
@@ -160,7 +160,7 @@ def sp5():
             ".TRAN 10n 1.001 START='1.001-10m'\n"
             ".FOUR 100 V(out)\n"
             ".END\n\n")
-    write(name, naiyou)
+    write(name, naiyou,net5)
 
 def sp6():
     print("6.直流利得、位相余裕、利得帯域幅の.spファイルを生成します。")
@@ -185,7 +185,7 @@ def sp6():
             ".PRINT VDB(out) VP(out)\n"
             ".MEAS AC dcgain FIND VDB(out) AT=0.1\n"
             ".END\n\n")
-    write(name, naiyou)
+    write(name, naiyou,net6)
 
 def sp7():
     print("7.電源電圧変動除去比の.spファイルを生成します。")
@@ -224,7 +224,7 @@ def sp7():
             ".MEAS AC ps   FIND VDB(od,oss) AT=0.1\n"
             ".MEAS AC psrr PARAM='min(pd,ps)' AT=0.1\n"
             ".END\n\n")
-    write(name, naiyou)
+    write(name, naiyou,net7)
 
 def sp8():
     print("7.電源電圧変動除去比の.spファイルを生成します。")
@@ -251,7 +251,7 @@ def sp8():
             ".AC DEC 100 0.1 10G\n"
             ".MEAS AC cmrr MAX VDB(od,oc) FROM=0.1 TO=10G\n"
             ".END\n\n")
-    write(name, naiyou)
+    write(name, naiyou,net8)
 
 def sp9():
     print("9.同相入力範囲の.spファイルを生成します。")
@@ -294,7 +294,7 @@ def sp9():
             ".PRINT V(out1,os) V(out2,os)\n"
             "+ PAR'1-ABS(V(out1,os))/(0.5*V(in1))' PAR'1-ABS(V(out2,os))/(0.5*V(in1))'\n\n"
             ".END\n\n")
-    write(name,naiyou)
+    write(name,naiyou,net9)
 
 def sp10():
     print("10.入力換算雑音の.spファイルを生成します。")
@@ -317,7 +317,7 @@ def sp10():
             ".AC DEC 100 0.1 1MEG\n"
             ".NOISE V(out) VIN 10\n"
             ".END\n\n")
-    write(name,naiyou)
+    write(name,naiyou,net10)
 
 line()
 print("このツールはオペアンプの性能評価の.spファイルを生成するツールです。")
